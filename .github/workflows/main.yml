@@ -26,4 +26,4 @@ jobs:
           settings-path: ${{ github.workspace }} # location for the settings.xml file
         
       - name: Build Docker Image with Maven
-        run: mvn package
+        run: mvn dockerfile:build
