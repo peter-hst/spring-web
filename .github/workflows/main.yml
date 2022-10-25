@@ -35,5 +35,5 @@ jobs:
           logout: true
       - name: Push Docker Image to Hub Repos   
         run: |
-          docker tag spring-web:latest ${{secrets.DOCKER_USER}}/spring-web:${{github.sha}}
-          docker push ${{secrets.DOCKER_USER}}/spring-web:${{github.sha}}
+          docker tag spring-web:latest ${{secrets.DOCKER_USER}}/spring-web:latest
+          docker push ${{secrets.DOCKER_USER}}/spring-web:latest
