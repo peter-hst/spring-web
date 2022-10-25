@@ -33,7 +33,21 @@ jobs:
           username: ${{ secrets.DOCKER_USER }}
           password: ${{ secrets.DOCKER_PASSWORD }}
           logout: true
+          
       - name: Push Docker Image to Hub Repos   
         run: |
-          docker tag spring-web:latest ${{secrets.DOCKER_USER}}/spring-web:latest
-          docker push ${{secrets.DOCKER_USER}}/spring-web:latest
+          docker tag ${{secrets.DOCKER_USER}}/spring-web:latest ${{secrets.DOCKER_USER}}/spring-web:${{github.sha}}
+          docker push ${{secrets.DOCKER_USER}}/spring-web:${{github.sha}}
+          
+      - name: Trigger CI
+        uses: InformaticsMatters/trigger-ci-action@1.0.1
+        with:
+          ci-owner: peter-hst
+          ci-repository: spring-web-devops
+          ci-ref: refs/heads/master
+          ci-user: peter-hst
+          ci-user-token: ${{ secrets.CI_TOKEN }}
+          ci-name: CI
+          ci-inputs: >-
+            image=${{ secrets.DOCKER_USER }}/spring-web
+            sha-tag=${{ github.sha }}
