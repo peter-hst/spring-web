@@ -27,3 +27,13 @@ jobs:
         
       - name: Build Docker Image with Maven
         run: mvn package
+      - name: Docker Login
+        uses: docker/login-action@v2.1.0
+        with:
+          username: ${{ secrets.DOCKER_USER }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          logout: true
+      - name: Push Docker Image to Hub Repos   
+        run: |
+          docker tag spring-web:latest ${{ secrets.DOCKER_USER }}/spring-web:${{ github.sha }}
+          docker push ${{ secrets.DOCKER_USER }}/spring-web:${{ github.sha }}
