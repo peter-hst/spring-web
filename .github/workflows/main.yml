@@ -47,7 +47,7 @@ jobs:
           ci-ref: refs/heads/master
           ci-user: peter-hst
           ci-user-token: ${{ secrets.CI_TOKEN }}
-          ci-name: CI
+          ci-name: CD
           ci-inputs: >-
             image=${{ secrets.DOCKER_USER }}/spring-web
             sha-tag=${{ github.sha }}
