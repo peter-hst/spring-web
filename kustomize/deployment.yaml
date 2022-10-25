@@ -1,0 +1,49 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: spring-web
+  namespace: web-app
+  labels:
+    app: spring-web
+    version: v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spring-web
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: spring-web
+        version: v1
+    spec:
+      containers:
+        - name: spring-web
+          image: peter371/spring-web
+          ports:
+            - name: http-8080
+              containerPort: 8080
+              protocol: TCP
+          imagePullPolicy: Always
+          env:
+            - name: DB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: db-info
+                  key: DB_USERNAME
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-connection
+                  key: DB_PASSWORD
+            - name: DB_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: db-info
+                  key: DB_HOST
+            - name: DB_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: db-info
+                  key: DB_PORT

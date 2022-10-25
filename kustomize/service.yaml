@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: spring-web
+  labels:
+    app: spring-web
+spec:
+  ports:
+    - port: 8080
+  selector:
+    app: spring-web
+  type: NodePort
