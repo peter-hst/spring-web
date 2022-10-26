@@ -15,7 +15,7 @@ public class HomeController {
                 .dbHost(System.getenv("DB_HOST"))
                 .dbUser(System.getenv("DB_USERNAME"))
                 .dbPwd(System.getenv("DB_PASSWORD"))
-                .msg("Hello Spring-boot v0.1.0-SNAPSHOT running in " + InetAddress.getLocalHost().getHostName())
+                .msg("Hello Spring-boot v0.3.0-SNAPSHOT running in " + InetAddress.getLocalHost().getHostName())
                 .build();
     }
 }
