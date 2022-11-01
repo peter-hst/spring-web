@@ -44,9 +44,9 @@ jobs:
         with:
           ci-owner: peter-hst
           ci-repository: spring-web-devops
-          ci-ref: refs/heads/master
+          ci-ref: refs/heads/main
           ci-user: peter-hst
-          ci-user-token: ${{ secrets.CI_TOKEN }}
+          ci-user-token: ${{ secrets.CD_TOKEN }}
           ci-name: CD
           ci-inputs: >-
             image=${{ secrets.DOCKER_USER }}/spring-web
