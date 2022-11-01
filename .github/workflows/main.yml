@@ -24,7 +24,9 @@ jobs:
           distribution: 'temurin'
           server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
           settings-path: ${{ github.workspace }} # location for the settings.xml file
-        
+      
+      - uses: skjolber/maven-cache-github-action@v1.1
+      
       - name: Build Docker Image with Maven
         run: mvn package
       - name: Docker Login
@@ -39,7 +41,7 @@ jobs:
           docker tag ${{secrets.DOCKER_USER}}/spring-web:latest ${{secrets.DOCKER_USER}}/spring-web:${{github.sha}}
           docker push ${{secrets.DOCKER_USER}}/spring-web:${{github.sha}}
           
-      - name: Trigger CI
+      - name: Trigger CD Workflow
         uses: InformaticsMatters/trigger-ci-action@1.0.1
         with:
           ci-owner: peter-hst
