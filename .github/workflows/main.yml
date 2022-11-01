@@ -17,6 +17,11 @@ jobs:
       packages: write
     steps:
       - uses: actions/checkout@v3
+      - name: Maven Cache
+        uses: skjolber/maven-cache-github-action@v1.1
+        with:
+          upload-chunk-size: 2097152
+        
       - name: Set up JDK 17
         uses: actions/setup-java@v3.6.0
         with:
@@ -24,8 +29,6 @@ jobs:
           distribution: 'temurin'
           server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
           settings-path: ${{ github.workspace }} # location for the settings.xml file
-      
-      - uses: skjolber/maven-cache-github-action@v1.1
       
       - name: Build Docker Image with Maven
         run: mvn package
